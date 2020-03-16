@@ -142,3 +142,5 @@ cython_debug/
 media
 
 .flaskenv
+migrations/
+app.db
