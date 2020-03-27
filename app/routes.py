@@ -1,8 +1,8 @@
 from flask import render_template, redirect, url_for, flash
-from app import app
-from app.forms import LoginForm
+from app import app, db
+from app.forms import LoginForm, RegisterNewProjectForm
 from flask_login import current_user, login_user, logout_user, login_required
-from app.models import User
+from app.models import User, Project, Income_Expense
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -24,7 +24,24 @@ def login():
 @app.route('/index')
 @login_required
 def index():
-    return 'Hello'
+    return render_template('index.html')
+
+@app.route('/submitnewproject', methods=['GET', 'POST'])
+@login_required
+def submitnewproject():
+    form = RegisterNewProjectForm()
+    if form.validate_on_submit():
+        NEW_PROJECT = Project(project_name=form.project_name.data,
+                              investment_type=form.investment_type.data,
+                              company_share=form.company_share.data,
+                              non_corporated_partners=form.non_corporated_partners.data,
+                              start_date=form.start_date.data,
+                              end_date=form.end_date.data,
+                              description=form.description.data)
+        print(NEW_PROJECT)
+        db.session.add(NEW_PROJECT)
+        db.session.commit()
+    return render_template('submitnewproject.html', form=form)
 
 
 @app.route('/logout')
