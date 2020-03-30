@@ -19,7 +19,6 @@ def login():
         return redirect(url_for('index'))
     return render_template('login.html', title='Sign In', form=form)
 
-
 @app.route('/')
 @app.route('/index')
 @login_required
@@ -29,6 +28,7 @@ def index():
 @app.route('/submitnewproject', methods=['GET', 'POST'])
 @login_required
 def submitnewproject():
+    Project_Table = Project.query.all()
     form = RegisterNewProjectForm()
     if form.validate_on_submit():
         NEW_PROJECT = Project(project_name=form.project_name.data,
@@ -38,10 +38,11 @@ def submitnewproject():
                               start_date=form.start_date.data,
                               end_date=form.end_date.data,
                               description=form.description.data)
-        print(NEW_PROJECT)
         db.session.add(NEW_PROJECT)
         db.session.commit()
-    return render_template('submitnewproject.html', form=form)
+    for i in Project_Table:
+        print (i)
+    return render_template('submitnewproject.html', form=form, data=Project_Table)
 
 
 @app.route('/logout')

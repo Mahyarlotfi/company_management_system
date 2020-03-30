@@ -29,11 +29,11 @@
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/index">
         <div class="sidebar-brand-icon rotate-n-15">
           <i class="fas fa-laugh-wink"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+        <div class="sidebar-brand-text mx-3">EBM <sup>IG</sup></div>
       </a>
 
       <!-- Divider -->
@@ -80,8 +80,6 @@
             <h6 class="collapse-header">Financial Management:</h6>
             <a class="collapse-item" href="utilities-color.html">Colors</a>
             <a class="collapse-item" href="utilities-border.html">Borders</a>
-            <a class="collapse-item" href="utilities-animation.html">Animations</a>
-            <a class="collapse-item" href="utilities-other.html">Other</a>
           </div>
         </div>
       </li>
@@ -89,20 +87,6 @@
       <!-- Divider -->
       <hr class="sidebar-divider">
 
-      <!-- Heading -->
-      <div class="sidebar-heading">
-        Reporting
-      </div>
-
-      <!-- Nav Item - Tables -->
-      <li class="nav-item">
-        <a class="nav-link" href="tables.html">
-          <i class="fas fa-fw fa-table"></i>
-          <span>Tables</span></a>
-      </li>
-
-      <!-- Divider -->
-      <hr class="sidebar-divider d-none d-md-block">
 
       <!-- Sidebar Toggler (Sidebar) -->
       <div class="text-center d-none d-md-inline">
@@ -278,7 +262,7 @@
                   Activity Log
                 </a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                <a class="dropdown-item" href="/logout" data-toggle="modal" data-target="#logoutModal">
                   <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                   Logout
                 </a>
@@ -385,72 +369,145 @@
 
       </div>
       <!-- End of Main Content -->
-
+      <!-- Divider -->
+      <hr class="sidebar-divider my-0">
       <!-- Form submit new project -->
 
       <div class="container-fluid">
-
-{% block content %}
-    <h1>Register</h1>
-    <form action="" method="post">
-        {{ form.hidden_tag() }}
-        <div>
-            {{ form.project_name.label }}<br>
-            {{ form.project_name(size=64) }}<br>
-            {% for error in form.project_name.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </div>
-project_name
-        <p>
-            {{ form.investment_type.label }}<br>
-            {{ form.investment_type(size=64) }}<br>
-            {% for error in form.investment_type.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-        <p>
-            {{ form.company_share.label }}<br>
-            {{ form.company_share(size=32) }}<br>
-            {% for error in form.company_share.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-        <p>
-            {{ form.non_corporated_partners.label }}<br>
-            {{ form.non_corporated_partners(size=32) }}<br>
-            {% for error in form.non_corporated_partners.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-        <p>
-            {{ form.start_date.label }}<br>
-            {{ form.start_date(size=64) }}<br>
-            {% for error in form.start_date.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-        <p>
-            {{ form.end_date.label }}<br>
-            {{ form.end_date(size=32) }}<br>
-            {% for error in form.end_date.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-        <p>
-            {{ form.description.label }}<br>
-            {{ form.description(size=32) }}<br>
-            {% for error in form.description.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-        <p>{{ form.submit() }}</p>
-    </form>
-{% endblock %}
-
+          {% block content %}
+          <form action="" method="post">
+              {{ form.hidden_tag() }}
+            <div class="row">
+              <div class="form-group col-md-6">
+                {% for error in form.project_name.errors %}
+                <div class="alert alert-danger" role="alert">
+                  [{{ error }}]
+                </div>
+                {% endfor %}
+                <input type="text" class="form-control form-control-user" placeholder="Project Name" name="project_name">
+              </div>
+              <div class="form-group col-md-6">
+                {% for error in form.investment_type.errors %}
+                <div class="alert alert-danger" role="alert">
+                  [{{ error }}]
+                </div>
+                {% endfor %}
+                  <select class="form-control form-control-user" placeholder="Investment Type" name="investment_type">
+                    <option value="Buy Land">Buy Land</option>
+                    <option value="House Reconstruction">House Reconstruction</option>
+                  </select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-md-6">
+                {% for error in form.company_share.errors %}
+                <div class="alert alert-danger" role="alert">
+                  [{{ error }}]
+                </div>
+                {% endfor %}
+                <input type="number" min="1" max="100" id="mypercent" class="form-control form-control-user" placeholder="Company Share" name="company_share">
+              </div>
+              <div class="form-group col-md-6">
+                {% for error in form.non_corporated_partners.errors %}
+                <div class="alert alert-danger" role="alert">
+                  [{{ error }}]
+                </div>
+                {% endfor %}
+                <input type="text" class="form-control form-control-user" placeholder="Non Corporated Partners" name="non_corporated_partners">
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-md-6">
+                {% for error in form.start_date.errors %}
+                <div class="alert alert-danger" role="alert">
+                  [{{ error }}]
+                </div>
+                {% endfor %}
+                <input type="text" class="form-control form-control-user" placeholder="Start Date (e.g 1398-01-22)" name="start_date">
+              </div>
+              <div class="form-group col-md-6">
+                {% for error in form.end_date.errors %}
+                <div class="alert alert-danger" role="alert">
+                  [{{ error }}]
+                </div>
+                {% endfor %}
+                <input type="text" class="form-control form-control-user" placeholder="End Date (e.g 1398-01-22)" name="end_date">
+              </div>
+            </div>
+              <div class="form-group">
+                {% for error in form.description.errors %}
+                <div class="alert alert-danger" role="alert">
+                  [{{ error }}]
+                </div>
+                {% endfor %}
+                <input type="text" class="form-control form-control-user" placeholder="Description" name="description">
+              </div>
+              <button type="submit" class="btn btn-primary btn-block">
+                Submit
+              </button>
+          </form>
+          {% endblock %}
       </div>
       <!-- End Forms -->
-	      
+
+      <div class="boarder-top my-3"></div>
+      <hr class="sidebar-divider">
+
+      <div class="container-fluid">
+
+        <!-- Page Heading -->
+
+        
+                <!-- DataTales Example -->
+                <div class="card shadow mb-4">
+                  <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Project Tables</h6>
+                  </div>
+                  <div class="card-body">
+                    <div class="table-responsive">
+                      <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                          <tr>
+                            <th>User Name</th>
+                            <th>Investment Type</th>
+                            <th>Company Share</th>
+                            <th>Non Corporated Partners</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                            <th>Description</th>
+                          </tr>
+                        </thead>
+                        <tfoot>
+                          <tr>
+                            <th>Project Name</th>
+                            <th>Investment Type</th>
+                            <th>Company Share</th>
+                            <th>Non Corporated Partners</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                            <th>Description</th>
+                          </tr>
+                        </tfoot>
+                        <tbody>  
+                          {% for pr in data %}
+                          <tr>
+                            <td>{{ pr.project_name }}</td>
+                            <td>{{ pr.investment_type }}</td>
+                            <td>{{ pr.company_share }} %</td>
+                            <td>{{ pr.non_corporated_partners }}</td>
+                            <td>{{ pr.start_date }}</td>
+                            <td>{{ pr.end_date }}</td>
+                            <td>{{ pr.description }}</td>
+                          </tr>
+                          {% endfor %}
+
+
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+	      </div>
       <!-- Footer -->
       <footer class="sticky-footer bg-white">
         <div class="container my-auto">
@@ -485,7 +542,7 @@ project_name
         <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
         <div class="modal-footer">
           <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          <a class="btn btn-primary" href="login.html">Logout</a>
+          <a class="btn btn-primary" href="/logout">Logout</a>
         </div>
       </div>
     </div>
