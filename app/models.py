@@ -31,13 +31,13 @@ class Project(db.Model):
     investment_type = db.Column(db.String(32), index=True)
     company_share = db.Column(db.Integer, index=True)
     non_corporated_partners = db.Column(db.String(128), index=True)
-    start_date = db.Column(db.DateTime, index=True, unique=True)
-    end_date = db.Column(db.DateTime, index=True, unique=True)
+    start_date = db.Column(db.DateTime, index=True)
+    end_date = db.Column(db.DateTime, index=True)
     description = db.Column(db.String(256), index=True)
     income_expense = db.relationship('Income_Expense', backref='project_finance', lazy=True)
 
     def __repr__(self):
-        return f"User('{self.project_name}', '{self.investment_type}', '{self.company_share}', '{self.start_date}', '{self.start_date}', '{self.description}')"
+        return f"Project('{self.project_name}', '{self.investment_type}', '{self.company_share}', '{self.start_date}', '{self.start_date}', '{self.description}')"
 
 
 class Income_Expense(db.Model):
@@ -53,7 +53,7 @@ class Income_Expense(db.Model):
     project_id = db.Column(db.Integer, db.ForeignKey('project.id'), nullable=False) 
 
     def __repr__(self):
-        return f"User('{self.cost_type}', '{self.payment_method}', '{self.date_of_payment}', '{self.amount}', '{self.description}, '{self.date_of_submit}')"
+        return f"Income_Expense('{self.cost_type}', '{self.payment_method}', '{self.date_of_payment}', '{self.amount}', '{self.description}, '{self.date_of_submit}')"
 
 
 
